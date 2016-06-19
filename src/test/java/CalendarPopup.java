@@ -27,7 +27,7 @@ public class CalendarPopup {
    public void closeBroswer() {
        driver.close();
    }
-@Ignore
+
     @Test
     public void checkCalendarDate () throws InterruptedException {
         CurrentDate = "18.06.2016";
@@ -35,13 +35,14 @@ public class CalendarPopup {
         Assert.assertTrue(element.getAttribute("value").equals(CurrentDate));
         Thread.sleep(2000);
     }
-   @Ignore
+
     @Test
-    public void checkCalendarIconDispaying() {
+    public void checkCalendarpickerDisplaying() {
         WebElement Element1 = driver.findElement(By.id("datapickericon"));
-        Assert.assertTrue(Element1.isDisplayed());
+        Element1.click();
+        WebElement datepickerPopUp = driver.findElement(By.id("ui-datepicker-div"));
+        Assert.assertTrue(datepickerPopUp.isDisplayed());
     }
-    @Ignore
     @Test
     public void checkMonthInCalendarPicker() {
         CurrentMonth = "Июнь";
@@ -49,6 +50,15 @@ public class CalendarPopup {
         element.click();
         WebElement element2 = driver.findElement(By.className("ui-datepicker-month"));
         Assert.assertTrue(element2.getText().contains(CurrentMonth));
+    }
+
+    @Test
+    public void checkYearInCalendarPicker() {
+        String CurrentYear = "2016";
+        WebElement element = driver.findElement(By.id("datapickericon"));
+        element.click();
+        WebElement element2 = driver.findElement(By.cssSelector(".ui-datepicker-year"));
+        Assert.assertTrue(element2.getText().contains(CurrentYear));
     }
 
     @Test
